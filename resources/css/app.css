@@ -1,0 +1,425 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium Tactile Minimalism Design System */
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 207, 255, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 20px 5px rgba(0, 207, 255, 0.2);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes bounce-subtle {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* ===== BASE LAYER ===== */
+@layer base {
+
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply font-medium;
+    }
+
+    /* Premium selection color */
+    ::selection {
+        background-color: #1A1A1A;
+        color: #FFFFFF;
+    }
+
+    /* Custom scrollbar for webkit browsers */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #F0F0F2;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #D4D4D4;
+        border-radius: 4px;
+        transition: background 0.2s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #A3A3A3;
+    }
+
+    /* Focus ring customization */
+    *:focus-visible {
+        outline: 2px solid #1A1A1A;
+        outline-offset: 2px;
+    }
+
+    /* Fix button focus */
+    button:focus-visible {
+        outline-offset: 4px;
+    }
+
+    /* Premium heading styles */
+    h1,
+    h2,
+    h3 {
+        @apply tracking-tight;
+    }
+}
+
+/* ===== COMPONENT LAYER ===== */
+@layer components {
+
+    /* Tactile card base */
+    .tactile-card {
+        @apply bg-white rounded-3xl shadow-tactile border border-white/50;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .tactile-card:hover {
+        @apply shadow-tactile-hover;
+        transform: translateY(-4px);
+    }
+
+    /* Pill badge */
+    .pill-badge {
+        @apply inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider;
+        transition: all 0.3s ease;
+    }
+
+    .pill-badge:hover {
+        transform: scale(1.05);
+    }
+
+    /* Gloss button effect */
+    .btn-gloss {
+        @apply relative overflow-hidden;
+    }
+
+    .btn-gloss::before {
+        content: '';
+        @apply absolute inset-0 bg-gradient-to-b from-white/20 to-transparent pointer-events-none;
+    }
+
+    /* Animate on scroll */
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .animate-fade-in-down {
+        animation: fadeInDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .animate-fade-in-scale {
+        animation: fadeInScale 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .animate-slide-in-left {
+        animation: slideInLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .animate-slide-in-right {
+        animation: slideInRight 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .animate-bounce-subtle {
+        animation: bounce-subtle 2s ease-in-out infinite;
+    }
+
+    /* Stagger delays for grid items */
+    .stagger-1 {
+        animation-delay: 0.1s;
+        opacity: 0;
+    }
+
+    .stagger-2 {
+        animation-delay: 0.2s;
+        opacity: 0;
+    }
+
+    .stagger-3 {
+        animation-delay: 0.3s;
+        opacity: 0;
+    }
+
+    .stagger-4 {
+        animation-delay: 0.4s;
+        opacity: 0;
+    }
+
+    .stagger-5 {
+        animation-delay: 0.5s;
+        opacity: 0;
+    }
+
+    .stagger-6 {
+        animation-delay: 0.6s;
+        opacity: 0;
+    }
+
+    /* Premium icon containers */
+    .icon-container {
+        @apply flex items-center justify-center rounded-2xl transition-all duration-300;
+    }
+
+    .icon-container-sm {
+        @apply w-10 h-10;
+    }
+
+    .icon-container-md {
+        @apply w-14 h-14;
+    }
+
+    .icon-container-lg {
+        @apply w-16 h-16;
+    }
+
+    /* Premium card hover with 3D effect */
+    .card-3d {
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        transform-style: preserve-3d;
+    }
+
+    .card-3d:hover {
+        transform: translateY(-8px) rotateX(2deg);
+    }
+
+    /* Shimmer loading effect */
+    .shimmer {
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite;
+    }
+
+    /* Glass morphism card */
+    .glass-card {
+        @apply bg-white/80 backdrop-blur-xl rounded-3xl border border-white/50;
+    }
+
+    /* Gradient text */
+    .gradient-text {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-obsidian to-mono-600;
+    }
+}
+
+/* ===== UTILITIES LAYER ===== */
+@layer utilities {
+
+    /* Text shadow for headers */
+    .text-shadow-sm {
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .text-shadow-md {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Backdrop blur enhancement */
+    .backdrop-premium {
+        backdrop-filter: blur(20px) saturate(180%);
+    }
+
+    /* Custom transition timings */
+    .transition-bounce {
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .transition-smooth {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Spacing utilities for consistent gaps */
+    .gap-section {
+        gap: 2rem;
+    }
+
+    .gap-section-lg {
+        gap: 3rem;
+    }
+
+    /* Safe hover for touch devices */
+    @media (hover: hover) {
+        .hover-lift:hover {
+            transform: translateY(-4px);
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    /* Pulse animation for CTAs */
+    .pulse-attention {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+/* ===== BUTTON MICRO-INTERACTIONS ===== */
+button,
+a[role="button"],
+.btn {
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+button:active,
+a[role="button"]:active,
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* ===== INPUT INTERACTIONS ===== */
+input,
+textarea,
+select {
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    transform: scale(1.01);
+}
+
+/* ===== LINK HOVER UNDERLINE ===== */
+.link-underline {
+    position: relative;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+    width: 100%;
+}
