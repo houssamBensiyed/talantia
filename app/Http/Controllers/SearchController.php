@@ -46,6 +46,9 @@ class SearchController extends Controller
      */
     public function show(User $user): View
     {
+        // Eager load relationships for profile display
+        $user->load(['candidateProfile.skills', 'candidateProfile.experiences', 'jobOffers']);
+        
         return view('search.show', compact('user'));
     }
 }

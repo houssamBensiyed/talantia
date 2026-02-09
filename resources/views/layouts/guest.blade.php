@@ -29,7 +29,7 @@
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-2 px-6 sm:px-10 py-8 sm:py-10 bg-white shadow-tactile overflow-hidden rounded-3xl sm:rounded-4xl border border-white/50 relative animate-fade-in-scale" style="animation-delay: 0.1s;">
+            <div class="w-full sm:max-w-md mt-2 px-6 sm:px-10 py-8 sm:py-10 bg-white shadow-tactile overflow-hidden rounded-xl sm:rounded-2xl border border-white/50 relative animate-fade-in-scale" style="animation-delay: 0.1s;">
                 <div class="absolute top-0 left-0 w-24 md:w-32 h-24 md:h-32 bg-mono-50 rounded-full -ml-12 md:-ml-16 -mt-12 md:-mt-16 opacity-50 pointer-events-none"></div>
                 <div class="absolute bottom-0 right-0 w-20 md:w-24 h-20 md:h-24 bg-mono-50 rounded-full -mr-10 md:-mr-12 -mb-10 md:-mb-12 opacity-50 pointer-events-none"></div>
                 <div class="relative z-10">

@@ -1,178 +1,181 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center gap-4 animate-fade-in-up">
-            <div class="w-14 h-14 bg-white rounded-2xl shadow-tactile flex items-center justify-center animate-float">
-                <i class="fas fa-th-large text-obsidian text-xl"></i>
-            </div>
+        <div class="flex items-center justify-between">
             <div>
-                <h2 class="font-extrabold text-3xl text-obsidian leading-tight tracking-tight">
+                <h2 class="font-extrabold text-3xl text-obsidian tracking-tight">
                     {{ __('Tableau de bord') }}
                 </h2>
-                <p class="text-sm text-mono-500 font-medium tracking-wide">Centre de contrôle</p>
+                <p class="text-sm text-mono-500 font-medium mt-1">Vue d'ensemble de votre activité</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-bold px-3 py-1 bg-mono-100 text-mono-600 rounded-full border border-mono-200 uppercase tracking-wider">
+                    {{ Auth::user()->isRecruiter() ? 'Recruteur' : 'Candidat' }}
+                </span>
             </div>
         </div>
     </x-slot>
 
     <div class="py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Welcome Card -->
-            <div class="bg-white rounded-4xl shadow-tactile p-8 md:p-12 mb-10 relative overflow-hidden group hover:shadow-tactile-hover transition-all duration-500 animate-fade-in-up">
-                <div class="absolute top-0 right-0 w-80 h-80 bg-mono-50 rounded-full -mr-20 -mt-20 opacity-60 pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 w-48 h-48 bg-mono-50 rounded-full -ml-24 -mb-24 opacity-40 pointer-events-none"></div>
-                
-                <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
-                    <div class="relative animate-fade-in-scale" style="animation-delay: 0.2s;">
-                        <img src="{{ Auth::user()->photo_url }}" alt="{{ Auth::user()->name }}" class="w-28 h-28 md:w-32 md:h-32 rounded-3xl object-cover border-4 border-white shadow-tactile">
-                        <div class="absolute -bottom-2 -right-2 w-10 h-10 bg-electric-blue rounded-xl flex items-center justify-center shadow-lg animate-pulse-glow">
-                            <i class="fas fa-check text-white text-sm"></i>
-                        </div>
-                    </div>
-                    <div class="text-center md:text-left flex-1">
-                        <h1 class="text-3xl md:text-4xl font-extrabold text-obsidian tracking-tight mb-3">
-                            Bonjour, {{ Auth::user()->name }}
-                        </h1>
-                        <p class="text-mono-500 text-lg font-medium flex items-center justify-center md:justify-start gap-3 flex-wrap">
-                            @if(Auth::user()->isRecruiter())
-                                <span class="pill-badge bg-obsidian text-white shadow-gloss">
-                                    <i class="fas fa-building-columns mr-2"></i>Recruteur
-                                </span>
-                                @if(Auth::user()->company)
-                                    <span class="text-mono-400">chez</span>
-                                    <span class="font-bold text-obsidian">{{ Auth::user()->company }}</span>
-                                @endif
-                            @else
-                                <span class="pill-badge bg-obsidian text-white shadow-gloss">
-                                    <i class="fas fa-rocket mr-2"></i>Talent
-                                </span>
-                                @if(Auth::user()->specialty)
-                                    <span class="text-mono-600">{{ Auth::user()->specialty }}</span>
-                                @endif
-                            @endif
-                        </p>
-                    </div>
-                    <div class="hidden md:block">
-                        <a href="{{ route('profile.edit') }}">
-                            <x-secondary-button class="!rounded-2xl !px-8 !py-4">
-                                <i class="fas fa-sliders mr-2"></i> Paramètres
-                            </x-secondary-button>
-                        </a>
-                    </div>
-                </div>
+            
+            <!-- Welcome Section -->
+            <div class="mb-10">
+                <h1 class="text-3xl font-bold text-obsidian mb-2">Bonjour, {{ Auth::user()->name }}</h1>
+                <p class="text-mono-500">Heureux de vous revoir. Voici ce qui se passe aujourd'hui.</p>
             </div>
 
             <!-- Dashboard Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Search Users -->
-                <a href="{{ route('search.index') }}" class="group bg-white rounded-4xl shadow-tactile p-8 card-3d block relative overflow-hidden animate-fade-in-up stagger-1">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-mono-50 rounded-full -mr-16 -mt-16 opacity-50 pointer-events-none group-hover:opacity-70 transition-opacity"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 bg-mono-50 rounded-2xl flex items-center justify-center mb-6 shadow-pressed group-hover:bg-obsidian group-hover:shadow-gloss transition-all duration-300">
-                            <i class="fas fa-compass text-2xl transition-colors duration-300 text-obsidian group-hover:text-white"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                
+                <!-- Stat Card 1 -->
+                @if(Auth::user()->isRecruiter())
+                    <div class="bg-white p-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-mono-200 group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-mono-500 text-sm font-medium">Offres actives</span>
+                            <div class="w-8 h-8 rounded-lg bg-mono-50 flex items-center justify-center text-obsidian group-hover:bg-brand-accent transition-colors">
+                                <i class="fas fa-briefcase text-sm"></i>
+                            </div>
                         </div>
-                        <h3 class="font-bold text-xl text-obsidian mb-3 tracking-tight">Exploration</h3>
-                        <p class="text-mono-500 font-medium leading-relaxed mb-6">
-                            @if(Auth::user()->isRecruiter())
-                                Accéder à la base de talents.
-                            @else
-                                Parcourir les opportunités.
-                            @endif
-                        </p>
+                        <div class="text-3xl font-extrabold text-obsidian">{{ Auth::user()->jobOffers()->count() }}</div>
+                        <a href="{{ route('jobs.my') }}" class="text-xs font-bold text-mono-400 mt-2 block group-hover:text-obsidian transition-colors">Gérer mes offres &rarr;</a>
                     </div>
-                    <div class="absolute bottom-8 right-8 text-mono-300 group-hover:text-obsidian transition-all duration-300 group-hover:translate-x-2">
-                        <i class="fas fa-arrow-right text-xl"></i>
+
+                    <div class="bg-white p-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-mono-200 group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-mono-500 text-sm font-medium">Candidatures reçues</span>
+                            <div class="w-8 h-8 rounded-lg bg-mono-50 flex items-center justify-center text-obsidian group-hover:bg-brand-accent transition-colors">
+                                <i class="fas fa-users text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-extrabold text-obsidian">
+                            {{ Auth::user()->jobOffers()->withCount('applications')->get()->sum('applications_count') }}
+                        </div>
+                        <a href="{{ route('jobs.my') }}" class="text-xs font-bold text-mono-400 mt-2 block group-hover:text-obsidian transition-colors">Voir les candidats &rarr;</a>
+                    </div>
+                @else
+                    <div class="bg-white p-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-mono-200 group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-mono-500 text-sm font-medium">Candidatures</span>
+                            <div class="w-8 h-8 rounded-lg bg-mono-50 flex items-center justify-center text-obsidian group-hover:bg-brand-accent transition-colors">
+                                <i class="fas fa-paper-plane text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-extrabold text-obsidian">{{ Auth::user()->applications()->count() }}</div>
+                        <a href="{{ route('applications.my') }}" class="text-xs font-bold text-mono-400 mt-2 block group-hover:text-obsidian transition-colors">Voir le suivi &rarr;</a>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-mono-200 group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-mono-500 text-sm font-medium">Connexions</span>
+                            <div class="w-8 h-8 rounded-lg bg-mono-50 flex items-center justify-center text-obsidian group-hover:bg-brand-accent transition-colors">
+                                <i class="fas fa-user-friends text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-extrabold text-obsidian">{{ Auth::user()->friends()->count() }}</div>
+                        <a href="{{ route('friends.index') }}" class="text-xs font-bold text-mono-400 mt-2 block group-hover:text-obsidian transition-colors">Voir mon réseau &rarr;</a>
+                    </div>
+                @endif
+                
+                <!-- Common Cards -->
+                <div class="bg-white p-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-mono-200 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-mono-500 text-sm font-medium">Profil</span>
+                        <div class="w-8 h-8 rounded-lg bg-mono-50 flex items-center justify-center text-obsidian group-hover:bg-brand-accent transition-colors">
+                            <i class="fas fa-user-circle text-sm"></i>
+                        </div>
+                    </div>
+                    
+                    @php
+                        $completionItems = ['name', 'email', 'photo', 'bio'];
+                        if(Auth::user()->isRecruiter()) $completionItems[] = 'company';
+                        else $completionItems[] = 'specialty';
+                        
+                        $filled = 0;
+                        foreach($completionItems as $item) {
+                            if(!empty(Auth::user()->$item)) $filled++;
+                        }
+                        $completion = round(($filled / count($completionItems)) * 100);
+                    @endphp
+
+                    <div class="flex items-end gap-2">
+                         <div class="text-3xl font-extrabold text-obsidian">{{ $completion }}%</div>
+                         <span class="text-sm text-mono-400 mb-1">complété</span>
+                    </div>
+                    
+                    <a href="{{ route('profile.edit') }}" class="text-xs font-bold text-mono-400 mt-2 block group-hover:text-obsidian transition-colors">Mettre à jour &rarr;</a>
+                </div>
+
+                <a href="{{ route('search.index') }}" class="bg-obsidian p-6 rounded-xl shadow-gloss hover:shadow-gloss-hover transition-all duration-300 group flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-brand-accent opacity-10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-500"></div>
+                    
+                    <div class="flex items-center justify-between mb-4 relative z-10">
+                        <span class="text-mono-300 text-sm font-medium">Explorer</span>
+                        <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white">
+                            <i class="fas fa-compass text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="text-lg font-bold text-white leading-tight mb-1">
+                            {{ Auth::user()->isRecruiter() ? 'Trouver des talents' : 'Trouver un job' }}
+                        </div>
+                        <div class="text-xs text-mono-400">Lancer la recherche &rarr;</div>
                     </div>
                 </a>
+            </div>
 
-                <!-- Edit Profile -->
-                <a href="{{ route('profile.edit') }}" class="group bg-white rounded-4xl shadow-tactile p-8 card-3d block relative overflow-hidden animate-fade-in-up stagger-2">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-mono-50 rounded-full -mr-16 -mt-16 opacity-50 pointer-events-none group-hover:opacity-70 transition-opacity"></div>
+            <!-- Quick Actions Section with clean styling -->
+            <div class="bg-white rounded-xl shadow-card border border-mono-200 overflow-hidden">
+                <div class="p-6 border-b border-mono-100 flex items-center justify-between">
+                    <h3 class="font-bold text-lg text-obsidian">Actions Rapides</h3>
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @if(Auth::user()->isRecruiter())
+                        <a href="{{ route('jobs.create') }}" class="flex items-center gap-4 p-4 rounded-lg bg-mono-50 hover:bg-brand-accent/20 border border-transparent hover:border-brand-accent transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <i class="fas fa-plus text-obsidian"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-obsidian">Publier une offre</div>
+                                <div class="text-xs text-mono-500 group-hover:text-obsidian/70">Créer une nouvelle opportunité</div>
+                            </div>
+                        </a>
+                    @else
+                        <a href="{{ route('candidate.profile.edit') }}" class="flex items-center gap-4 p-4 rounded-lg bg-mono-50 hover:bg-brand-accent/20 border border-transparent hover:border-brand-accent transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <i class="fas fa-file-alt text-obsidian"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-obsidian">Mon CV</div>
+                                <div class="text-xs text-mono-500 group-hover:text-obsidian/70">Mettre à jour mes compétences</div>
+                            </div>
+                        </a>
+                    @endif
                     
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 bg-mono-50 rounded-2xl flex items-center justify-center mb-6 shadow-pressed group-hover:bg-obsidian group-hover:shadow-gloss transition-all duration-300">
-                            <i class="fas fa-id-card text-2xl transition-colors duration-300 text-obsidian group-hover:text-white"></i>
+                    <a href="{{ route('profile.show') }}" class="flex items-center gap-4 p-4 rounded-lg bg-mono-50 hover:bg-mono-100 border border-transparent transition-all duration-300 group">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fas fa-eye text-obsidian"></i>
                         </div>
-                        <h3 class="font-bold text-xl text-obsidian mb-3 tracking-tight">Identité</h3>
-                        <p class="text-mono-500 font-medium leading-relaxed mb-6">Gérer votre présence et vos informations.</p>
-                    </div>
-                    <div class="absolute bottom-8 right-8 text-mono-300 group-hover:text-obsidian transition-all duration-300 group-hover:translate-x-2">
-                        <i class="fas fa-arrow-right text-xl"></i>
-                    </div>
-                </a>
-
-                <!-- Account Stats / Completion -->
-                <div class="bg-obsidian rounded-4xl shadow-gloss p-8 text-white relative overflow-hidden animate-fade-in-up stagger-3">
-                    <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -mr-24 -mt-24 pointer-events-none"></div>
-                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full -ml-16 -mb-16 pointer-events-none"></div>
-                    
-                    <div class="relative z-10 h-full flex flex-col justify-between">
                         <div>
-                            <div class="flex justify-between items-start mb-6">
-                                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                                    <i class="fas fa-chart-pie text-white text-2xl"></i>
-                                </div>
-                                <span class="text-sm font-mono text-mono-400">{{ Auth::user()->created_at->format('d/m/Y') }}</span>
-                            </div>
-                            
-                            <h3 class="font-bold text-xl text-white mb-2 tracking-tight">État du profil</h3>
-                            
-                            @php
-                                $completionItems = [
-                                    'name' => !empty(Auth::user()->name),
-                                    'email' => !empty(Auth::user()->email),
-                                    'photo' => !empty(Auth::user()->photo),
-                                    'bio' => !empty(Auth::user()->bio),
-                                ];
-                                if(Auth::user()->isRecruiter()) {
-                                    $completionItems['company'] = !empty(Auth::user()->company);
-                                } else {
-                                    $completionItems['specialty'] = !empty(Auth::user()->specialty);
-                                }
-                                $completion = round((array_sum($completionItems) / count($completionItems)) * 100);
-                            @endphp
-
-                            <div class="mt-6">
-                                <div class="flex justify-between text-sm mb-3 font-medium">
-                                    <span class="text-mono-300">Complétion</span>
-                                    <span class="text-electric-blue font-bold">{{ $completion }}%</span>
-                                </div>
-                                <div class="w-full bg-white/10 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-gradient-to-r from-electric-blue to-cyber-cyan h-3 rounded-full shadow-[0_0_15px_rgba(0,207,255,0.5)] transition-all duration-1000" style="width: {{ $completion }}%"></div>
-                                </div>
-                            </div>
+                            <div class="font-bold text-obsidian">Voir mon profil public</div>
+                            <div class="text-xs text-mono-500">Aperçu visible par les autres</div>
                         </div>
+                    </a>
 
-                        @if($completion < 100)
-                        <div class="mt-8 pt-6 border-t border-white/10">
-                             <a href="{{ route('profile.edit') }}" class="text-sm text-mono-300 hover:text-white transition-colors flex items-center gap-2 font-medium group">
-                                Terminer la configuration 
-                                <i class="fas fa-chevron-right text-xs group-hover:translate-x-1 transition-transform"></i>
-                             </a>
-                        </div>
-                        @endif
-                    </div>
+                    <form method="POST" action="{{ route('logout') }}" class="block">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center gap-4 p-4 rounded-lg bg-mono-50 hover:bg-red-50 border border-transparent hover:border-red-100 transition-all duration-300 group text-left">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <i class="fas fa-sign-out-alt text-mono-600 group-hover:text-red-500"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-obsidian group-hover:text-red-700">Déconnexion</div>
+                                <div class="text-xs text-mono-500 group-hover:text-red-400">Fermer la session</div>
+                            </div>
+                        </button>
+                    </form>
                 </div>
             </div>
-            
-            <!-- Quick Stats Row -->
-            <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                 <div class="bg-white rounded-3xl p-6 shadow-tactile flex flex-col items-center justify-center text-center hover:shadow-tactile-hover hover:-translate-y-1 transition-all duration-300 animate-fade-in-up stagger-4">
-                     <span class="text-4xl font-extrabold text-obsidian mb-2">24</span>
-                     <span class="text-xs font-bold uppercase tracking-wider text-mono-400">Vues Profil</span>
-                 </div>
-                 <div class="bg-white rounded-3xl p-6 shadow-tactile flex flex-col items-center justify-center text-center hover:shadow-tactile-hover hover:-translate-y-1 transition-all duration-300 animate-fade-in-up stagger-5">
-                     <span class="text-4xl font-extrabold text-obsidian mb-2">12</span>
-                     <span class="text-xs font-bold uppercase tracking-wider text-mono-400">Messages</span>
-                 </div>
-                 <div class="bg-white rounded-3xl p-6 shadow-tactile flex flex-col items-center justify-center text-center hover:shadow-tactile-hover hover:-translate-y-1 transition-all duration-300 animate-fade-in-up stagger-6">
-                     <span class="text-4xl font-extrabold text-obsidian mb-2">5</span>
-                     <span class="text-xs font-bold uppercase tracking-wider text-mono-400">Favoris</span>
-                 </div>
-                 <div class="bg-white/50 border-2 border-dashed border-mono-300 rounded-3xl p-6 flex flex-col items-center justify-center text-center hover:border-obsidian hover:bg-white cursor-pointer transition-all duration-300 group animate-fade-in-up stagger-6">
-                     <i class="fas fa-plus text-mono-400 mb-2 group-hover:text-obsidian transition-colors text-lg group-hover:scale-110 transform"></i>
-                     <span class="text-xs font-bold uppercase tracking-wider text-mono-400 group-hover:text-obsidian transition-colors">Ajouter</span>
-                 </div>
-            </div>
+
         </div>
     </div>
 </x-app-layout>

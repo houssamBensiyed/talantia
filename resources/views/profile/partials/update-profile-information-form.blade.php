@@ -75,9 +75,7 @@
         <!-- Bio -->
         <div>
             <x-input-label for="bio" :value="__('Bio')" />
-            <textarea id="bio" name="bio" rows="4" 
-                      class="mt-2 block w-full bg-mono-50 border-2 border-transparent focus:bg-white focus:border-obsidian focus:ring-0 rounded-2xl shadow-pressed text-obsidian placeholder-mono-400 transition-all duration-300 font-medium py-4 px-5 tracking-wide resize-none"
-                      placeholder="Parlez-nous de vous...">{{ old('bio', $user->bio) }}</textarea>
+            <x-textarea id="bio" name="bio" rows="4" placeholder="Parlez-nous de vous...">{{ old('bio', $user->bio) }}</x-textarea>
             <p class="mt-2 text-xs text-mono-500 font-medium">Maximum 500 caractères</p>
             <x-input-error class="mt-2" :messages="$errors->get('bio')" />
         </div>

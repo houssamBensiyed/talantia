@@ -248,12 +248,12 @@
                             <!-- Removed Spacer w-8 to fix spacing -->
                             <span class="relative inline-block ml-4">
                                 <span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.2s">R</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.25s">é</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.3s">s</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.35s">e</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.4s">a</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.45s">u</span></span>
-                                <span class="absolute left-0 bottom-2 h-4 bg-[#CCFF00] -z-10 reseau-underline" style="width: 0%;"></span>
+                                <span class="absolute left-0 bottom-2 h-4 bg-brand-accent -z-10 reseau-underline" style="width: 0%;"></span>
                             </span>
                         </span>
                         <span class="relative font-medium block vivant-wrapper origin-left">
                             <span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.6s">V</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.65s">i</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.7s">v</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.75s">a</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.8s">n</span></span><span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 0.85s">t</span></span>
-                            <span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 1s"><span class="absolute -right-8 top-4 w-4 h-4 bg-[#CCFF00] rounded-full"></span></span></span>
+                            <span class="title-reveal-wrapper"><span class="title-reveal-char" style="animation-delay: 1s"><span class="absolute -right-8 top-4 w-4 h-4 bg-brand-accent rounded-full"></span></span></span>
                         </span>
                     </h1>
 
@@ -312,7 +312,7 @@
                                          <div class="animate-counter-spin">
                                             <!-- Corrector (Inverse 60deg) -->
                                             <div style="transform: rotate(-60deg);">
-                                                <div class="w-3 h-3 bg-[#CCFF00] rounded-full"></div>
+                                                <div class="w-3 h-3 bg-brand-accent rounded-full"></div>
                                             </div>
                                          </div>
                                     </div>
@@ -342,7 +342,7 @@
                                                         <img src="https://i.pravatar.cc/150?u=med1" alt="Top Talent">
                                                     </div>
                                                     <!-- Label moved outside the overflow-hidden container if any, but now we use avatar-node-style which is safe -->
-                                                    <div class="absolute -top-4 -right-4 z-20 bg-[#CCFF00] text-black text-[11px] font-black px-3 py-1 rounded-full shadow-md whitespace-nowrap transform group-hover:scale-110 transition-transform">TOP 1%</div>
+                                                    <div class="absolute -top-4 -right-4 z-20 bg-brand-accent text-black text-[11px] font-black px-3 py-1 rounded-full shadow-md whitespace-nowrap transform group-hover:scale-110 transition-transform">TOP 1%</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -354,7 +354,7 @@
                                     <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2">
                                         <div class="animate-counter-spin-reverse">
                                             <div style="transform: rotate(-340deg);">
-                                                <div class="w-3.5 h-3.5 bg-[#CCFF00] rounded-full shadow-sm"></div>
+                                                <div class="w-3.5 h-3.5 bg-brand-accent rounded-full shadow-sm"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -637,9 +637,9 @@
             </div>
             
             <div class="flex gap-16 text-sm font-bold text-gray-500 uppercase tracking-widest">
-                <a href="#" class="hover:text-[#CCFF00] transition-colors">Talents</a>
-                <a href="#" class="hover:text-[#CCFF00] transition-colors">Entreprises</a>
-                <a href="{{ route('login') }}" class="hover:text-[#CCFF00] transition-colors">Login</a>
+                <a href="#" class="hover:text-brand-accent transition-colors">Talents</a>
+                <a href="#" class="hover:text-brand-accent transition-colors">Entreprises</a>
+                <a href="{{ route('login') }}" class="hover:text-brand-accent transition-colors">Login</a>
             </div>
         </div>
     </footer>

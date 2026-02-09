@@ -16,7 +16,7 @@
     <div class="py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Search Form -->
-            <div class="bg-white shadow-tactile rounded-4xl overflow-hidden mb-10 relative animate-fade-in-up">
+            <div class="bg-white shadow-tactile rounded-2xl overflow-hidden mb-10 relative animate-fade-in-up">
                 <div class="absolute top-0 right-0 w-48 h-48 bg-mono-50 rounded-full -mr-24 -mt-24 opacity-50 pointer-events-none"></div>
                 
                 <form method="GET" action="{{ route('search.index') }}" class="p-6 md:p-8 relative z-10">
@@ -75,7 +75,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
                     @foreach($users as $index => $user)
-                        <a href="{{ route('users.show', $user) }}" class="group bg-white shadow-tactile rounded-3xl overflow-hidden hover:shadow-tactile-hover transition-all duration-300 hover:-translate-y-2 animate-fade-in-up" style="animation-delay: {{ 0.1 + ($index * 0.05) }}s; opacity: 0;">
+                        <a href="{{ route('users.show', $user) }}" class="group bg-white shadow-tactile rounded-xl overflow-hidden hover:shadow-tactile-hover transition-all duration-300 hover:-translate-y-2 animate-fade-in-up" style="animation-delay: {{ 0.1 + ($index * 0.05) }}s; opacity: 0;">
                             <div class="p-6 relative">
                                 <div class="absolute top-0 right-0 w-20 h-20 bg-mono-50 rounded-full -mr-10 -mt-10 opacity-50 pointer-events-none group-hover:opacity-70 transition-opacity"></div>
                                 
@@ -133,7 +133,7 @@
                 </div>
             @else
                 <!-- No Results -->
-                <div class="bg-white shadow-tactile rounded-4xl p-12 md:p-16 text-center relative overflow-hidden animate-fade-in-up">
+                <div class="bg-white shadow-tactile rounded-2xl p-12 md:p-16 text-center relative overflow-hidden animate-fade-in-up">
                     <div class="absolute top-0 right-0 w-48 h-48 bg-mono-50 rounded-full -mr-24 -mt-24 opacity-50 pointer-events-none"></div>
                     <div class="absolute bottom-0 left-0 w-32 h-32 bg-mono-50 rounded-full -ml-16 -mb-16 opacity-50 pointer-events-none"></div>
                     

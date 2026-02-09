@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:\\\\Users\\\\houss\\\\Herd\\\\talantia\\\\app\\\\Http\\\\Middleware\\\\JobSeekerMiddleware.php\" << 'EOF'\n<?php\n\nnamespace App\\\\Http\\\\Middleware;\n\nuse Closure;\nuse Illuminate\\\\Http\\\\Request;\nuse Symfony\\\\Component\\\\HttpFoundation\\\\Response;\n\nclass JobSeekerMiddleware\n{\n    /**\n     * Handle an incoming request.\n     *\n     * @param  \\\\Closure\\(\\\\Illuminate\\\\Http\\\\Request\\): \\(\\\\Symfony\\\\Component\\\\HttpFoundation\\\\Response\\)  $next\n     */\n    public function handle\\(Request $request, Closure $next\\): Response\n    {\n        if \\(!$request->user\\(\\) || !$request->user\\(\\)->isJobSeeker\\(\\)\\) {\n            abort\\(403, 'Accès réservé aux chercheurs d\\\\'emploi.'\\);\n        }\n\n        return $next\\($request\\);\n    }\n}\nEOF)",
+      "Bash(php:*)"
+    ]
+  }
+}
