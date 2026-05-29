@@ -1,59 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌟 Talantia — Professional Talent & Recruitment Network
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Talantia is a modern, high-performance professional network and decentralized-style recruitment platform. Built on top of the latest **Laravel 12.x** and **Livewire 4.x** stack, it empowers Job Seekers to showcase their professional profiles and build connections, while providing Recruiters with a robust Applicant Tracking System (ATS) to post job opportunities and manage applications.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 👤 Multi-Role User Profiles
+- **Role-Based Workflows**: Separate, tailored experiences for **Job Seekers** and **Recruiters**.
+- **User Slugs**: Clean, SEO-friendly URLs (`/users/john-doe`) generated dynamically with SQLite-safe unique slugging.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📄 Interactive CV & Resume Builder (Job Seekers)
+- **Candidate Profiles**: Custom bio, profile picture, title, and social links.
+- **Formations (Education)**: Create, track, and update academic credentials.
+- **Experiences**: Manage professional history, roles, companies, and durations.
+- **Skill Tagging**: Seamless interactive skills management.
 
-## Learning Laravel
+### 💼 Smart Job Board & ATS (Recruiters)
+- **Job Offers Lifecycle**: Create, edit, publish, close, and reopen job listings.
+- **Application Flow**: Job seekers apply directly to open jobs with one click.
+- **Status Pipeline**: Recruiters can move applications through a pipeline: `Pending` ➡️ `Under Review` ➡️ `Accepted` or `Rejected` in real-time.
+- **Application Tracking**: Detailed overview of active applications for both applicants and recruiters.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🤝 Professional Networking Engine
+- **Friendship Lifecycle**: High-performance connection system allowing users to send, accept, reject, or cancel connection requests.
+- **My Circle**: A dedicated space to manage active professional connections.
+- **Discovery Search**: Live searching and filtering of professional users and active job openings.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🛠️ The Tech Stack
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Framework**: Laravel 12.x
+- **Frontend Interactivity**: Livewire 4.x & AlpineJS
+- **Styling**: Tailwind CSS v4 & PostCSS
+- **Build Tool**: Vite v7
+- **Database**: SQLite (Pre-migrated, high-speed single-file DB)
+- **Deployment & Containers**: Docker CLI (Composer / PHP isolated containers)
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 💻 Quick Start & Running Guide
 
-## Contributing
+This project is configured to run smoothly in a **Smart Hybrid Environment**. If you do not have PHP or Composer installed locally on your host machine, you can run all PHP processes in lightweight Docker containers while running Vite natively on your host.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 📋 Prerequisites
+- **Docker** (For isolated PHP/Laravel environment)
+- **Node.js** (v22+) & **NPM** (For blazing fast frontend compilation)
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1️⃣ Run the PHP Server & Queue (Docker)
 
-## Security Vulnerabilities
+To run the application back-end, launch the isolated containers using the official Composer/PHP Docker image:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+# 1. Start the Laravel App Server (Port 8000)
+docker run -d --name talantia-app \
+  -p 8000:8000 \
+  -v "$(pwd)":/app \
+  -w /app \
+  --entrypoint php \
+  composer artisan serve --host=0.0.0.0 --port=8000
 
-## License
+# 2. Start the Queue Listener for Background Tasks
+docker run -d --name talantia-queue \
+  -v "$(pwd)":/app \
+  -w /app \
+  --entrypoint php \
+  composer artisan queue:listen --tries=1
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+### 2️⃣ Run the Frontend Dev Server (Host)
+
+Install frontend dependencies and start Vite with hot-reload directly on your host machine:
+
+```bash
+# Install packages
+npm install
+
+# Start Vite server
+npm run dev
+```
+
+Your services are now running at:
+- **Application Homepage**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- **Vite Dev Server**: [http://localhost:5173](http://localhost:5173)
+
+---
+
+### 3️⃣ Managing PHP Commands via Docker
+
+Since PHP is run inside Docker, use the following command wrappers to manage your database, seeders, or cache:
+
+```bash
+# Run Database Migrations
+docker run --rm --entrypoint php -v "$(pwd)":/app -w /app composer artisan migrate
+
+# Seed the Database
+docker run --rm --entrypoint php -v "$(pwd)":/app -w /app composer artisan db:seed
+
+# Clear Application Cache
+docker run --rm --entrypoint php -v "$(pwd)":/app -w /app composer artisan cache:clear
+
+# Run Pest PHP Unit Tests
+docker run --rm --entrypoint php -v "$(pwd)":/app -w /app composer artisan test
+```
+
+To stop and clean up the backend containers:
+```bash
+docker rm -f talantia-app talantia-queue
+```
+
+---
+
+## 📂 Project Architecture
+
+```
+talantia/
+├── app/                  # Core Laravel PHP Logic
+│   ├── Http/             # Controllers, Middlewares, Requests
+│   └── Models/           # Eloquent Database Models
+├── bootstrap/            # Application Bootstrap & Configuration
+├── config/               # App configuration files
+├── database/             # SQLite migrations, seeders, and factories
+├── resources/            # Front-end resources (Blade views, CSS, JS)
+│   ├── css/              # App Tailwind styling
+│   ├── js/               # Client-side AlpineJS
+│   └── views/            # Laravel Blade templates & Livewire components
+├── routes/               # Web & Auth Route definitions
+├── tests/                # Pest/PHPUnit testing suite
+├── vite.config.js        # Vite compiler configuration
+└── package.json          # Node dependencies & custom dev scripts
+```
+
+---
+
+## 📝 License
+
+The Talantia project is open-sourced software licensed under the [MIT license](LICENSE).

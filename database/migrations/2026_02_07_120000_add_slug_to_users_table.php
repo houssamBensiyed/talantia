@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -15,15 +17,21 @@ return new class extends Migration
             $table->string('slug')->unique()->after('name');
         });
 
-        // Generate slugs for existing users
-        \DB::statement('UPDATE users SET slug = LOWER(REPLACE(LOWER(name), " ", "-")) WHERE slug IS NULL');
-        
-        // Ensure uniqueness by appending ID if needed
-        \DB::statement('UPDATE users u1 
-            SET slug = CONCAT(slug, "-", id)
-            WHERE id < (
-                SELECT MIN(id) FROM users u2 WHERE u2.slug = u1.slug
-            )');
+        $usedSlugs = [];
+
+        DB::table('users')
+            ->orderBy('id')
+            ->get(['id', 'name'])
+            ->each(function (object $user) use (&$usedSlugs): void {
+                $baseSlug = Str::slug($user->name) ?: 'user';
+                $slug = isset($usedSlugs[$baseSlug]) ? "{$baseSlug}-{$user->id}" : $baseSlug;
+
+                DB::table('users')
+                    ->where('id', $user->id)
+                    ->update(['slug' => $slug]);
+
+                $usedSlugs[$slug] = true;
+            });
     }
 
     /**

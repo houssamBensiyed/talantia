@@ -54,6 +54,29 @@ class User extends Authenticatable
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::creating(function (User $user): void {
+            if (! $user->slug) {
+                $user->slug = static::generateUniqueSlug($user->name);
+            }
+        });
+    }
+
+    protected static function generateUniqueSlug(string $name): string
+    {
+        $baseSlug = Str::slug($name) ?: 'user';
+        $slug = $baseSlug;
+        $suffix = 2;
+
+        while (static::where('slug', $slug)->exists()) {
+            $slug = "{$baseSlug}-{$suffix}";
+            $suffix++;
+        }
+
+        return $slug;
+    }
+
     /**
      * Check if the user is a recruiter.
      */
